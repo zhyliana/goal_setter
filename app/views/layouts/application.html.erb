@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>GoalSetterApp</title>
+  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+
+  <% flash.each do |flash_type, flash_message|%>
+    <%= flash_message %>
+  <% end %>
+
+  <% if !!current_user %>
+    <%= button_to "Sign Out", session_url, method: :delete %>
+		<h1>Welcome, <%= current_user.username %></h1>
+  <% end %>
+
+<%= yield %>
+</body>
+</html>

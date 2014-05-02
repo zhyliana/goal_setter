@@ -1,0 +1,14 @@
+<%= current_user.username %>'s Profile
+
+<h3> Create new goal </h3>
+<%= link_to "Create Goal", new_user_goal_url(current_user) %>
+<%= link_to "All Goals", goals_url %>
+
+<% current_user.goals.each do |goal| %>
+	<p>
+		<%= goal.title %> - <%= goal.completion ? "Complete!" : ""  %><br>
+		<% unless goal.completion %>
+			<%= button_to "Completed", completed_goal_url(goal), method: :get %>
+		<% end%>
+	</p>
+<% end %>

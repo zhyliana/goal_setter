@@ -1,0 +1,19 @@
+<h1> Create new goal </h1>
+
+<%= form_for(@goal, :url => user_goals_url(current_user)) do |g| %>
+  <%= g.label :title%>
+  <%= g.text_field :title%>
+	<br>
+  <%= g.label :privacy%>
+	<br>
+	<label> Private
+  <%= g.radio_button :privacy, "Private"%>
+	</label>
+
+	<label> Public
+  <%= g.radio_button :privacy, "Public"%>
+	</label>
+
+
+  <%= g.submit "Create Goal"%>
+<%end%>

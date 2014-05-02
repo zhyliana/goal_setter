@@ -1,0 +1,11 @@
+<h1> <%= show_text %> </h1>
+
+<%= form_for(user, :url => action_url) do |u| %>
+  <%= u.label :username%>
+  <%= u.text_field :username%>
+
+  <%= u.label :password%>
+  <%= u.text_field :password%>
+
+  <%= u.submit button_text %>
+<%end%>
