@@ -1,0 +1,4 @@
+<% @goals.each do | goal | %>
+	<%= goal.user.username %>- <br>
+	<%= goal.title %> - <%= "Complete!" if goal.completion %>
+<%end%>
