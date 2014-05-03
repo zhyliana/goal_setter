@@ -1,14 +1,39 @@
-<%= current_user.username %>'s Profile
+<%= @user.username %>'s Profile
+<% if @user == current_user %>
+	<h3> Create new goal </h3>
+	<%= link_to "Create Goal", new_user_goal_url(current_user) %>
+	<%= link_to "All Goals", goals_url %>
+<% else %>
+	Leave a comment:
+	<br>
+	<form action="<%= comments_url %>" method="POST">
+		<input type="hidden" name=comment[com_user_id] value="<%=@user.id%>">
+		<input type="hidden" name=comment[com_user_type] value="User">
 
-<h3> Create new goal </h3>
-<%= link_to "Create Goal", new_user_goal_url(current_user) %>
-<%= link_to "All Goals", goals_url %>
+		<label>Comment<br>
+			<input type="text" name=comment[body]>
+		</label><br>
 
-<% current_user.goals.each do |goal| %>
-	<p>
-		<%= goal.title %> - <%= goal.completion ? "Complete!" : ""  %><br>
-		<% unless goal.completion %>
-			<%= button_to "Completed", completed_goal_url(goal), method: :get %>
-		<% end%>
-	</p>
+		<input type="submit" value="Create comment">
+	</form>
+<% end %>
+
+<% @user.comments.each do |comment| %>
+	<p><%= comment.author.username %> says:<br>
+	<%= comment.body%></p>
+<% end %>
+
+<% if @user == current_user %>
+	<% @user.goals.each do |goal| %>
+			<p> <%= link_to goal.title, user_goal_url(@user, goal.id) %> - <%= goal.completion ? "Complete!" : ""  %><br>
+				<% unless goal.completion %>
+					<%= button_to "Completed", completed_goal_url(goal), method: :get %>
+				<% end%>
+			</p>
+	<% end %>
+<% else %>
+	<% @user.public_goals.each do |goal| %>
+			<p> <%= link_to goal.title, user_goal_url(@user, goal.id) %> - <%= goal.completion ? "Complete!" : ""  %><br>
+			</p>
+	<% end %>
 <% end %>

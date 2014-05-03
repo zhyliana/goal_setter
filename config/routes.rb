@@ -10,6 +10,7 @@ GoalSetterApp::Application.routes.draw do
 
   resources :goals, only: [ :edit, :update]
 
+  resources :comments
 
   resource :session
 

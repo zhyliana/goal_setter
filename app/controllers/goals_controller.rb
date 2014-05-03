@@ -1,6 +1,6 @@
 class GoalsController < ApplicationController
   def index
-    @goals = Goal.all.select{ |goal| goal.privacy == "Public" }
+    @goals = Goal.where(privacy: "Public" )
   end
 
   def new
@@ -25,6 +25,9 @@ class GoalsController < ApplicationController
     redirect_to user_url(@goal.user)
   end
 
+  def show
+    @goal = Goal.find(params[:id])
+  end
 
   def edit
   end

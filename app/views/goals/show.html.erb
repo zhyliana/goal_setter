@@ -1,0 +1,18 @@
+<h1> <%= @goal.title %> </h1>
+<%= @goal.user.username %>
+
+<% @goal.comments.each do | comment | %>
+	<p><%= comment.author.username %> says:<br>
+	<%= comment.body%></p>
+<% end %>
+
+<form action="<%= comments_url %>" method="POST">
+	<input type="hidden" name=comment[com_user_id] value="<%=@goal.id%>">
+	<input type="hidden" name=comment[com_user_type] value="Goal">
+
+	<label>Comment<br>
+		<input type="text" name=comment[body]>
+	</label><br>
+
+	<input type="submit" value="Create comment">
+</form>

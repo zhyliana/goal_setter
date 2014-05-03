@@ -12,8 +12,12 @@
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
+require 'faker'
 
 FactoryGirl.define do
   factory :goal do
+    title Faker::Company.bs
+    privacy "Public"
+    association :user, factory: :user
   end
 end
