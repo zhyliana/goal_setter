@@ -11,8 +11,11 @@
 #
 
 # Read about factories at https://github.com/thoughtbot/factory_girl
+require 'faker'
 
 FactoryGirl.define do
   factory :user do
+    username Faker::Internet.user_name
+    password "12345678"
   end
 end

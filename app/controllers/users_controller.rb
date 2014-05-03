@@ -15,11 +15,11 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-
-    if @user.save
+    begin
+      @user.try(:save)
       login(@user)
       redirect_to user_url(@user)#
-    else
+    rescue
       flash.now[:errors] = @user.errors.full_messages
       render :new
     end

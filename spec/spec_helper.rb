@@ -58,6 +58,14 @@ def sign_up_friend
 
 end
 
+def sign_up_buddy
+  visit new_user_url
+  fill_in 'Username', :with => "buddy"
+  fill_in 'Password', :with => "123"
+  click_on "Sign Up"
+
+end
+
 def sign_in
   visit new_session_url
   fill_in 'Username', :with => "test"

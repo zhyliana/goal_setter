@@ -12,9 +12,10 @@
 #
 
 class Goal < ActiveRecord::Base
-  validates :title, :user_id, presence: true
+  validates :title, :user, presence: true
   validates :completion, inclusion: { in: [true, false] }
   validates :privacy, inclusion: { in: ["Public", "Private"] }
 
   belongs_to :user, inverse_of: :goals
+  has_many :comments, as: :com_user #comments people leave on goal show
 end

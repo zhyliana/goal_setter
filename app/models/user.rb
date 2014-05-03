@@ -11,11 +11,14 @@
 #
 
 class User < ActiveRecord::Base
-  validate :username, :password, presence: true
-  validate :username, uniqueness: true
+  validates :username, presence: true
+  validates :password, :presence => true
+  validates :username, uniqueness: true
   before_validation :ensure_session_token
 
   has_many :goals, inverse_of: :user
+  has_many :authored_comments, class_name: "Comment", inverse_of: :author #comments user wrote
+  has_many :comments, as: :com_user #comments people leave on profile
 
 
   def reset_session_token!
@@ -23,6 +26,10 @@ class User < ActiveRecord::Base
     self.save!
 
     self.session_token
+  end
+
+  def public_goals
+    self.goals.where(privacy: "Public")
   end
 
   def self.find_by_credentials(user_name, raw_password)

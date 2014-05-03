@@ -1,4 +1,4 @@
 <% @goals.each do | goal | %>
-	<%= goal.user.username %>- <br>
-	<%= goal.title %> - <%= "Complete!" if goal.completion %>
+	<%= link_to goal.user.username, user_url(goal.user) %>- <br>
+	<%= link_to goal.title, user_goal_url(goal.user, goal) %>  <%= "- Complete!" if goal.completion %>
 <%end%>

@@ -14,5 +14,19 @@
 require 'spec_helper'
 
 describe Goal do
-  pending "add some examples to (or delete) #{__FILE__}"
+  subject(:goal) {build(:goal)}
+
+  it { should be_valid }
+
+  describe "validations" do
+    it { should validate_presence_of(:title) }
+    it { should validate_presence_of(:user) }
+    it { should ensure_inclusion_of(:privacy).in_array(["Private", "Public"]) }
+    it { should ensure_inclusion_of(:completion).in_array([true, false]) }
+  end
+
+  describe "associations" do
+    it { should belong_to(:user) }
+    it { should have_many(:comments) }
+  end
 end
