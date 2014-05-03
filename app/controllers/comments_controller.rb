@@ -15,7 +15,6 @@ class CommentsController < ApplicationController
       flash[:errors] = comment.errors.full_messages
       redirect_to :back
     end
-
   end
 
   private
